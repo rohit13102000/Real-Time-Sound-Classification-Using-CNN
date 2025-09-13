@@ -1,0 +1,6 @@
+flask
+numpy
+librosa
+resampy
+joblib
+tensorflow
