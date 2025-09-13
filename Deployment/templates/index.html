@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sound Classification</title>
+</head>
+<body>
+  <h2>Upload a .wav file</h2>
+  <form id="form">
+    <input type="file" id="file" accept=".wav" required>
+    <button type="submit">Predict</button>
+  </form>
+  <div id="label"></div>
+
+  <script>
+    const form = document.getElementById('form');
+    const fileInput = document.getElementById('file');
+    const label = document.getElementById('label');
+
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const res = await fetch('/predict', { method: 'POST', body: formData });
+      const data = await res.json();
+      label.innerText = `Prediction: ${data.prediction}`;
+    };
+  </script>
+</body>
+</html>
